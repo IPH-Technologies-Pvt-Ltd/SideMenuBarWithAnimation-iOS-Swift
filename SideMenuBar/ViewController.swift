@@ -23,8 +23,10 @@ class ViewController: UIViewController {
     var swipToRight = UISwipeGestureRecognizer()
     var swipeToLeft = UISwipeGestureRecognizer()
     var separatorLine:UIView!
+    var themeLabel: UILabel!
     
     
+    //MARK: life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +36,7 @@ class ViewController: UIViewController {
         logOutImg.frame = CGRect(x: 25, y: 50, width: 50, height: 50)
         logOutlabel = UILabel(frame: CGRect(x: 50, y: 50, width: 150, height: 50))
         themeImg.frame = CGRect(x: 25, y: 120, width: 50, height: 50)
-        
+        themeLabel = UILabel(frame: CGRect(x: 50, y: 120, width: 150, height: 50))
         sideBarView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: self.view.bounds.height))
         profileView = UIView(frame: CGRect(x: 0, y: 30, width: 200, height: 100))
         tableView = UITableView(frame: CGRect(x: 0, y: 40, width: 0, height: self.view.bounds.height - 140))
@@ -58,6 +60,9 @@ class ViewController: UIViewController {
         logOutlabel.font = UIFont.systemFont(ofSize: 20)
         logOutlabel.textAlignment = .center
         
+        themeLabel.text = "theme"
+        themeLabel.font = UIFont.systemFont(ofSize: 20)
+        themeLabel.textAlignment = .center
         
         codingLockLabel.text = "Coding Lock"
         codingLockLabel.font = UIFont.systemFont(ofSize: 15)
@@ -67,12 +72,12 @@ class ViewController: UIViewController {
         appDevLabel.font = UIFont.systemFont(ofSize: 15)
         appDevLabel.textColor = .black
         
-        
+        view.backgroundColor = .black
 //        tableView.backgroundColor = .blue
-//        sideBarView.backgroundColor = .red
-//        profileView.backgroundColor = .green
+        sideBarView.backgroundColor = .white
+        profileView.backgroundColor = .white
         clView.backgroundColor = .blue
-//        bottomView.backgroundColor = .yellow
+        bottomView.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -80,7 +85,7 @@ class ViewController: UIViewController {
         logOutImg.contentMode = .scaleAspectFit
         logOutImg.image = UIImage(named: "exit")
         themeImg.contentMode = .scaleAspectFit
-        themeImg.image = UIImage(named: "cloud")
+        themeImg.image = UIImage(named: "theme")
         
         separatorLine = UIView(frame: CGRect(x: 0, y: tableView.frame.maxY - 100, width: self.view.bounds.width, height: 0.5))
         separatorLine.backgroundColor = .black
@@ -97,6 +102,7 @@ class ViewController: UIViewController {
         self.bottomView.addSubview(logOutImg)
         self.bottomView.addSubview(logOutlabel)
         self.bottomView.addSubview(themeImg)
+        self.bottomView.addSubview(themeLabel)
         
         swipToRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedToRight))
         swipToRight.direction = .right
@@ -121,11 +127,11 @@ class ViewController: UIViewController {
             self.bottomView.frame = CGRect(x: 0, y: 600, width: 77, height:  200)
             self.logOutlabel.frame = CGRect(x: 65, y: 50, width: 20, height:  50)
             self.separatorLine.frame = CGRect(x: 0, y: 600, width: 77, height: 0.5)
-
+            self.themeLabel.frame = CGRect(x: 0, y: 120, width: 20, height:  50)
+            self.codingLockLabel = UILabel(frame: CGRect(x: 80, y: 15, width: 0, height: 0))
+            self.appDevLabel = UILabel(frame: CGRect(x: 80, y: 30, width: 0, height: 0))
             self.logOutlabel.text = ""
-//            self.codingLockLabel.isHidden = true
-//            self.appDevLabel.isHidden = true
-            // Decrease the width of sideBarView
+            self.themeLabel.text = ""
             self.sideBarView.frame.size.width /= 3.0
             self.tableView.frame.size.width /= 3.5
         }
@@ -144,7 +150,11 @@ class ViewController: UIViewController {
             self.bottomView.frame = CGRect(x: 0, y: 600, width: self.view.bounds.width/1.3, height:  200)
             self.logOutlabel.frame = CGRect(x: -20, y: 50, width: self.view.bounds.width/1.3, height: 50)
             self.separatorLine.frame = CGRect(x: 0, y: 600, width: self.view.bounds.width, height: 0.5)
+            self.themeLabel.frame = CGRect(x: -20, y: 120, width: self.view.bounds.width/1.3, height: 50)
+            self.codingLockLabel = UILabel(frame: CGRect(x: 80, y: 15, width: 100, height: 100))
+            self.appDevLabel = UILabel(frame: CGRect(x: 80, y: 30, width: 100, height: 100))
             self.logOutlabel.text = "logout"
+            self.themeLabel.text = "theme"
             self.appDevLabel.isHidden = false
             self.codingLockLabel.isHidden = false
         }
@@ -153,6 +163,7 @@ class ViewController: UIViewController {
 
 }
 
+// MARK: extension
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -162,13 +173,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        imgView = UIImageView(frame: CGRect(x: 20, y: 8, width: cell.bounds.height-16, height: cell.bounds.height-16))
+        imgView = UIImageView(frame: CGRect(x: 20, y: 8, width: cell.bounds.height-20, height: cell.bounds.height-20))
         imgView.contentMode = .scaleToFill
         
         if let image = UIImage(named: self.imgArray[indexPath.row]) {
             imgView.image = image
         } else {
-            // Handle the case where the image is not found
             imgView.image = nil
         }
         
