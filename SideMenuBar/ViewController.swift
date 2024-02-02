@@ -7,6 +7,7 @@ class ViewController: UIViewController {
     var sideBarView: UIView!
     var profileView: UIView!
     var clView: UIView!
+    var bottomView: UIView!
     var clLabel: UILabel!
     var codingLockLabel: UILabel!
     var appDevLabel: UILabel!
@@ -23,8 +24,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let menuBtn = UIBarButtonItem(title: "Menu", style: .done, target: self, action: #selector(menuBtnClick))
-//        self.navigationItem.leftBarButtonItem = menuBtn
         
         sideBarView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: self.view.bounds.height))
         profileView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
@@ -33,7 +32,7 @@ class ViewController: UIViewController {
         clLabel = UILabel(frame: CGRect(x: 13, y: 50, width: 50, height: 50))
         codingLockLabel = UILabel(frame: CGRect(x: 80, y: 15, width: 100, height: 100))
         appDevLabel = UILabel(frame: CGRect(x: 80, y: 30, width: 100, height: 100))
-        
+        bottomView = UIView(frame: CGRect(x: 0, y: 600, width: 200, height: 100))
         
         clLabel.text = "CL"
         clLabel.font = UIFont.systemFont(ofSize: 20)
@@ -53,9 +52,10 @@ class ViewController: UIViewController {
         //codingLockLabel.textAlignment = .center
         
         tableView.backgroundColor = .blue
-//        sideBarView.backgroundColor = .red
+        sideBarView.backgroundColor = .red
         profileView.backgroundColor = .green
         clView.backgroundColor = .blue
+        bottomView.backgroundColor = .yellow
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -68,6 +68,8 @@ class ViewController: UIViewController {
         self.sideBarView.addSubview(clLabel)
         self.profileView.addSubview(codingLockLabel)
         self.profileView.addSubview(appDevLabel)
+        self.sideBarView.addSubview(bottomView)
+        
         swipToRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedToRight))
         swipToRight.direction = .right
         self.view.addGestureRecognizer(swipToRight)
@@ -86,8 +88,9 @@ class ViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5) {
             self.sideBarView.frame = CGRect(x: 0, y: 0, width: 0, height: self.view.bounds.height)
-            self.tableView.frame = CGRect(x: 0, y: 200, width: 270, height: self.view.bounds.height - 200) // Adjust the height here
+            self.tableView.frame = CGRect(x: 0, y: 200, width: 270, height: 400) // Adjust the height here
             self.profileView.frame = CGRect(x: 0, y: 0, width: 77, height:  200)
+            self.bottomView.frame = CGRect(x: 0, y: 600, width: 77, height:  200)
             self.codingLockLabel.isHidden = true
             self.appDevLabel.isHidden = true
             // Decrease the width of sideBarView
@@ -104,39 +107,15 @@ class ViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5) {
             self.sideBarView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width/1.3, height: self.view.bounds.height)
-            self.tableView.frame = CGRect(x: 0, y: 200, width: self.view.bounds.width/1.3, height: self.view.bounds.height - 200) // Adjust the height here
+            self.tableView.frame = CGRect(x: 0, y: 200, width: self.view.bounds.width/1.3, height: 400) // Adjust the height here
             self.profileView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width/1.3, height:  200)
+            self.bottomView.frame = CGRect(x: 0, y: 600, width: self.view.bounds.width/1.3, height:  200)
             self.appDevLabel.isHidden = false
             self.codingLockLabel.isHidden = false
         }
         isEnableSideBarView = true
     }
 
-
-
-    // ... (existing code)
-
-//    @objc func menuBtnClick() {
-//        print("btn click")
-//
-//        if isEnableSideBarView {
-//            self.view.addGestureRecognizer(swipToRight)
-//            self.view.removeGestureRecognizer(swipeToLeft)
-//            UIView.animate(withDuration: 0.5) {
-//                self.sideBarView.frame = CGRect(x: 0, y: 0, width: 50, height: self.view.bounds.height)
-//                self.tableView.frame = CGRect(x: 0, y: 50, width: 50, height: self.view.bounds.height - 140)
-//            }
-//            isEnableSideBarView = false
-//        } else {
-//            self.view.addGestureRecognizer(swipeToLeft)
-//            self.view.removeGestureRecognizer(swipToRight)
-//            UIView.animate(withDuration: 0.5) {
-//                self.sideBarView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width/1.5, height: self.view.bounds.height)
-//                self.tableView.frame = CGRect(x: 0, y: 50, width: self.view.bounds.width/1.5, height: self.view.bounds.height - 140)
-//            }
-//            isEnableSideBarView = true
-//        }
-//    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
