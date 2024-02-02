@@ -13,33 +13,51 @@ class ViewController: UIViewController {
     var appDevLabel: UILabel!
     var tableView:UITableView!
     var isEnableSideBarView:Bool = false
-    var imgArray: [String] = ["dashboard", "revanue", "notification", "like", "wallet"]
-    var imgeNameLbl = ["Dashboard", "Revanue", "Notification", "Like", "Wallet"]
+    var imgArray: [String] = ["dashboard", "revanue", "notification", "like", "wallet", "analytics"]
+    var imgeNameLbl = ["Dashboard", "Revanue", "Notification", "Like", "Wallet", "Analytics"]
     var imgView: UIImageView!
     var lbl: UILabel!
-    
+    var logOutlabel: UILabel!
+    var logOutImg: UIImageView!
+    var themeImg: UIImageView!
     var swipToRight = UISwipeGestureRecognizer()
     var swipeToLeft = UISwipeGestureRecognizer()
+    var separatorLine:UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        logOutImg = UIImageView()
+        themeImg = UIImageView()
+        
+        logOutImg.frame = CGRect(x: 25, y: 50, width: 50, height: 50)
+        logOutlabel = UILabel(frame: CGRect(x: 50, y: 50, width: 150, height: 50))
+        themeImg.frame = CGRect(x: 25, y: 120, width: 50, height: 50)
         
         sideBarView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: self.view.bounds.height))
-        profileView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
-        tableView = UITableView(frame: CGRect(x: 0, y: 53, width: 0, height: self.view.bounds.height - 140))
-        clView = UIView(frame: CGRect(x: 13, y: 50, width: 50, height: 50))
-        clLabel = UILabel(frame: CGRect(x: 13, y: 50, width: 50, height: 50))
+        profileView = UIView(frame: CGRect(x: 0, y: 30, width: 200, height: 100))
+        tableView = UITableView(frame: CGRect(x: 0, y: 40, width: 0, height: self.view.bounds.height - 140))
+        clView = UIView(frame: CGRect(x: 13, y: 77, width: 50, height: 50))
+        clLabel = UILabel(frame: CGRect(x: 13, y: 77, width: 50, height: 50))
         codingLockLabel = UILabel(frame: CGRect(x: 80, y: 15, width: 100, height: 100))
         appDevLabel = UILabel(frame: CGRect(x: 80, y: 30, width: 100, height: 100))
         bottomView = UIView(frame: CGRect(x: 0, y: 600, width: 200, height: 100))
-        
+
+        tableView.separatorStyle = .none
+
         clLabel.text = "CL"
         clLabel.font = UIFont.systemFont(ofSize: 20)
         clLabel.textColor = .white
         clLabel.textAlignment = .center
-        clLabel.layer.cornerRadius = 10
-        clLabel.layer.masksToBounds = true
+        clView.layer.cornerRadius = 10
+        clView.layer.masksToBounds = true
+        
+        
+        logOutlabel.text = "logout"
+        logOutlabel.font = UIFont.systemFont(ofSize: 20)
+        logOutlabel.textAlignment = .center
+        
         
         codingLockLabel.text = "Coding Lock"
         codingLockLabel.font = UIFont.systemFont(ofSize: 15)
@@ -49,18 +67,25 @@ class ViewController: UIViewController {
         appDevLabel.font = UIFont.systemFont(ofSize: 15)
         appDevLabel.textColor = .black
         
-        //codingLockLabel.textAlignment = .center
         
-        tableView.backgroundColor = .blue
-        sideBarView.backgroundColor = .red
-        profileView.backgroundColor = .green
+//        tableView.backgroundColor = .blue
+//        sideBarView.backgroundColor = .red
+//        profileView.backgroundColor = .green
         clView.backgroundColor = .blue
-        bottomView.backgroundColor = .yellow
+//        bottomView.backgroundColor = .yellow
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
-      
+        logOutImg.contentMode = .scaleAspectFit
+        logOutImg.image = UIImage(named: "exit")
+        themeImg.contentMode = .scaleAspectFit
+        themeImg.image = UIImage(named: "cloud")
+        
+        separatorLine = UIView(frame: CGRect(x: 0, y: tableView.frame.maxY - 100, width: self.view.bounds.width, height: 0.5))
+        separatorLine.backgroundColor = .black
+        self.sideBarView.addSubview(separatorLine)
+     
         self.view.addSubview(sideBarView)
         self.sideBarView.addSubview(tableView)
         self.sideBarView.addSubview(profileView)
@@ -69,6 +94,9 @@ class ViewController: UIViewController {
         self.profileView.addSubview(codingLockLabel)
         self.profileView.addSubview(appDevLabel)
         self.sideBarView.addSubview(bottomView)
+        self.bottomView.addSubview(logOutImg)
+        self.bottomView.addSubview(logOutlabel)
+        self.bottomView.addSubview(themeImg)
         
         swipToRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedToRight))
         swipToRight.direction = .right
@@ -88,11 +116,15 @@ class ViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5) {
             self.sideBarView.frame = CGRect(x: 0, y: 0, width: 0, height: self.view.bounds.height)
-            self.tableView.frame = CGRect(x: 0, y: 200, width: 270, height: 400) // Adjust the height here
-            self.profileView.frame = CGRect(x: 0, y: 0, width: 77, height:  200)
+            self.tableView.frame = CGRect(x: 0, y: 150, width: 270, height: 400) // Adjust the height here
+            self.profileView.frame = CGRect(x: 0, y: 20, width: 77, height:  200)
             self.bottomView.frame = CGRect(x: 0, y: 600, width: 77, height:  200)
-            self.codingLockLabel.isHidden = true
-            self.appDevLabel.isHidden = true
+            self.logOutlabel.frame = CGRect(x: 65, y: 50, width: 20, height:  50)
+            self.separatorLine.frame = CGRect(x: 0, y: 600, width: 77, height: 0.5)
+
+            self.logOutlabel.text = ""
+//            self.codingLockLabel.isHidden = true
+//            self.appDevLabel.isHidden = true
             // Decrease the width of sideBarView
             self.sideBarView.frame.size.width /= 3.0
             self.tableView.frame.size.width /= 3.5
@@ -107,9 +139,12 @@ class ViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5) {
             self.sideBarView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width/1.3, height: self.view.bounds.height)
-            self.tableView.frame = CGRect(x: 0, y: 200, width: self.view.bounds.width/1.3, height: 400) // Adjust the height here
-            self.profileView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width/1.3, height:  200)
+            self.tableView.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width/1.3, height: 400) // Adjust the height here
+            self.profileView.frame = CGRect(x: 0, y: 20, width: self.view.bounds.width/1.3, height:  200)
             self.bottomView.frame = CGRect(x: 0, y: 600, width: self.view.bounds.width/1.3, height:  200)
+            self.logOutlabel.frame = CGRect(x: -20, y: 50, width: self.view.bounds.width/1.3, height: 50)
+            self.separatorLine.frame = CGRect(x: 0, y: 600, width: self.view.bounds.width, height: 0.5)
+            self.logOutlabel.text = "logout"
             self.appDevLabel.isHidden = false
             self.codingLockLabel.isHidden = false
         }
