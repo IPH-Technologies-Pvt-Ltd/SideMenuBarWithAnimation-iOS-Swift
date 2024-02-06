@@ -11,7 +11,6 @@
 		B76B44D52B69709D00C00FBC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B44D42B69709D00C00FBC /* SceneDelegate.swift */; };
 		B76B44D72B69709D00C00FBC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B44D62B69709D00C00FBC /* ViewController.swift */; };
 		B76B44DA2B69709D00C00FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B76B44D82B69709D00C00FBC /* Main.storyboard */; };
-		B76B44DD2B69709D00C00FBC /* SideMenuBar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B76B44DB2B69709D00C00FBC /* SideMenuBar.xcdatamodeld */; };
 		B76B44DF2B69709F00C00FBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B76B44DE2B69709F00C00FBC /* Assets.xcassets */; };
 		B76B44E22B69709F00C00FBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B76B44E02B69709F00C00FBC /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -22,7 +21,6 @@
 		B76B44D42B69709D00C00FBC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B76B44D62B69709D00C00FBC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B76B44D92B69709D00C00FBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B76B44DC2B69709D00C00FBC /* SideMenuBar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SideMenuBar.xcdatamodel; sourceTree = "<group>"; };
 		B76B44DE2B69709F00C00FBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B76B44E12B69709F00C00FBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B76B44E32B69709F00C00FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,7 +63,6 @@
 				B76B44DE2B69709F00C00FBC /* Assets.xcassets */,
 				B76B44E02B69709F00C00FBC /* LaunchScreen.storyboard */,
 				B76B44E32B69709F00C00FBC /* Info.plist */,
-				B76B44DB2B69709D00C00FBC /* SideMenuBar.xcdatamodeld */,
 			);
 			path = SideMenuBar;
 			sourceTree = "<group>";
@@ -144,7 +141,6 @@
 				B76B44D72B69709D00C00FBC /* ViewController.swift in Sources */,
 				B76B44D32B69709D00C00FBC /* AppDelegate.swift in Sources */,
 				B76B44D52B69709D00C00FBC /* SceneDelegate.swift in Sources */,
-				B76B44DD2B69709D00C00FBC /* SideMenuBar.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,19 +365,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		B76B44DB2B69709D00C00FBC /* SideMenuBar.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				B76B44DC2B69709D00C00FBC /* SideMenuBar.xcdatamodel */,
-			);
-			currentVersion = B76B44DC2B69709D00C00FBC /* SideMenuBar.xcdatamodel */;
-			path = SideMenuBar.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = B76B44C72B69709D00C00FBC /* Project object */;
 }
